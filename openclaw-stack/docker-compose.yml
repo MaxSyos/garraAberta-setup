@@ -1,0 +1,36 @@
+services:
+
+  openclaw:
+    build: ./openclaw
+    container_name: openclaw
+    environment:
+      - SECURE_TOKEN=${SECURE_TOKEN}
+      - SECURITY_BASE_URL=http://security-service:3000
+    ports:
+      - "18789:18789"
+    depends_on:
+      - security-service
+    stdin_open: true
+    tty: true
+
+  security-service:
+    build: ./security-service
+    container_name: security-service
+    environment:
+      - SECURE_TOKEN=${SECURE_TOKEN}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - scraper
+
+  scraper:
+    build: ./scraper
+    container_name: scraper
+    depends_on:
+      - proxy
+
+  proxy:
+    build: ./proxy
+    container_name: proxy
+    ports:
+      - "8080:8080"
