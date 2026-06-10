@@ -32,6 +32,18 @@ services:
     networks:
       - hermes-net
 
+  ngrok:
+    image: wernight/ngrok
+    container_name: hermes-ngrok
+    restart: unless-stopped
+    depends_on:
+      - hermes
+    environment:
+      NGROK_AUTHTOKEN: "${NGROK_AUTHTOKEN:-}"
+    command: sh -c 'if [ -z "$NGROK_AUTHTOKEN" ]; then echo "NGROK_AUTHTOKEN is not set; ngrok disabled."; sleep infinity; else exec ngrok http hermes:8080 --log=stdout; fi'
+    networks:
+      - hermes-net
+
 networks:
   hermes-net:
     driver: bridge
