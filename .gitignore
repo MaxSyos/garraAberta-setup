@@ -1,0 +1,30 @@
+# Build artifacts
+node_modules/
+*.pyc
+__pycache__/
+
+# Local editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+.env.*
+
+# Docker volume mount directories
+postgres/
+hermes-data/
+workspace/
+
+# Docker Compose override file (local overrides)
+docker-compose.override.yml
+
+# Local logs and temp
+*.log
+tmp/
