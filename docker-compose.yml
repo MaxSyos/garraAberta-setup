@@ -24,7 +24,7 @@ services:
     environment:
       POSTGRES_DB: hermes
       POSTGRES_USER: hermes
-      POSTGRES_PASSWORD: troque_essa_senha
+      POSTGRES_PASSWORD: hermes123456
     ports:
       - "5432:5432"
     volumes:
@@ -39,7 +39,7 @@ services:
     depends_on:
       - hermes
     environment:
-      NGROK_AUTHTOKEN: "${NGROK_AUTHTOKEN:-}"
+      NGROK_AUTHTOKEN: 2DYF8GMGCw7YvMRTmlgJY2J3Jih_86kKhTKDRVZ4QaC8o6u7w
     command: sh -c 'if [ -z "$NGROK_AUTHTOKEN" ]; then echo "NGROK_AUTHTOKEN is not set; ngrok disabled."; sleep infinity; else exec ngrok http hermes:8080 --log=stdout; fi'
     networks:
       - hermes-net

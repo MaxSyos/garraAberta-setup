@@ -1,61 +1,56 @@
 # garraAberta-setup
 
-## O que este projeto faz
+## 🚀 Instalação em um comando
 
-Este projeto roda o Hermes Agent em Docker e expõe a interface em `http://localhost:8080`.
-
-Também inclui um serviço opcional `ngrok` para expor o Hermes na internet.
-
-## Como usar (sem precisar entender programação)
-
-### 1. Criar um token ngrok
-
-1. Acesse https://dashboard.ngrok.com/get-started/your-authtoken
-2. Copie o token
-3. No terminal do projeto, defina a variável:
+Em um Linux recém instalado com apenas **conexão à internet**:
 
 ```bash
-export NGROK_AUTHTOKEN="seu_token_ngrok_aqui"
+curl -fsSL https://raw.githubusercontent.com/MaxSyos/garraAberta-setup/main/install.sh | bash
 ```
 
-### 2. Iniciar o projeto
+**É isso!** O script vai:
+- ✅ Instalar git, bash, curl, wget
+- ✅ Clonar o repositório
+- ✅ Instalar Docker e Docker Compose  
+- ✅ Iniciar a aplicação Hermes
 
-No diretório do projeto:
+Depois de alguns minutos, acesse: **`http://localhost:8080`**
 
-```bash
-docker compose up --build -d
-```
+## 📖 Instruções detalhadas
 
-### 3. Acessar localmente
+Veja [QUICK_START.md](QUICK_START.md) para mais informações.
 
-Abra no navegador:
+## 🔧 Comandos úteis
 
-- `http://localhost:8080`
-
-### 4. Acessar pela internet via ngrok
-
-Depois de iniciado, o ngrok cria um túnel para o serviço Hermes.
-
-Para ver o URL público, use:
-
-```bash
-docker compose logs -f ngrok
-```
-
-Procure uma linha como:
-
-```
-url=tcp://... or url=https://xxxxx.ngrok.io
-```
-
-### 5. Parar o projeto
-
+### Parar a aplicação
 ```bash
 docker compose down
 ```
 
-## O que foi adicionado
+### Reiniciar
+```bash
+docker compose up -d
+```
 
-- serviço `ngrok` no `docker-compose.yml`
-- `NGROK_AUTHTOKEN` lido de variável de ambiente
-- documentação simples em `README.md`
+### Ver logs
+```bash
+docker compose logs -f hermes
+```
+
+### Com ngrok (internet)
+```bash
+export NGROK_AUTHTOKEN="seu_token"
+docker compose up -d
+docker compose logs -f ngrok
+```
+
+## 📋 Requisitos
+
+- Linux Debian/Ubuntu
+- Conexão à internet
+- Acesso a sudo
+
+---
+
+**Pronto para usar!** 🎉
+
